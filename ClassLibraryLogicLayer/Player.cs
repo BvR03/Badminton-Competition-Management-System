@@ -1,6 +1,6 @@
 ﻿namespace ClassLibraryLogicLayer
 {
-    public class Class1
+    public class Player
     {
 
     }

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.13.35806.99 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton Competition Management System", "Badminton Competition Management System\Badminton Competition Management System.csproj", "{5929521A-178A-4067-B49A-920011AF3339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryDAL", "ClassLibraryDAL\ClassLibraryDAL.csproj", "{93CC3AA6-ADAB-4511-AEE8-398E60B00693}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "ClassLibraryDAL\DAL.csproj", "{93CC3AA6-ADAB-4511-AEE8-398E60B00693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryLogicLayer", "ClassLibraryLogicLayer\ClassLibraryLogicLayer.csproj", "{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayer", "ClassLibraryLogicLayer\LogicLayer.csproj", "{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
