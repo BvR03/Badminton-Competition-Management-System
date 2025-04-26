@@ -12,6 +12,6 @@ namespace LogicLayer
         public Team(string name)
         {
             this.Name = name;
-        }
+        }   
     }
 }

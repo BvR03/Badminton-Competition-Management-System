@@ -16,7 +16,7 @@ namespace LogicLayer
         }
         public List<Team> GetAllTeams()
         {
-            return teams;
+            return teams; //Temporary until Database
         }
 
     }
