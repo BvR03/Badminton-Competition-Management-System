@@ -7,4 +7,12 @@
     <RootNamespace>Badminton_Competition_Management_System</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
+  </ItemGroup>
+
 </Project>

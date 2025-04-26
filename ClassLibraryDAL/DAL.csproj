@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Badminton Competition Management System\Badminton Competition Management System.csproj" />
+    <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
+  </ItemGroup>
+
 </Project>
