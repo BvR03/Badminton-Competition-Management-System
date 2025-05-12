@@ -6,5 +6,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Active Sessions</h1>
-    <!--<p>Learn about <a href="login">building Web apps with ASP.NET Core</a>.</p>-->
+</div>
+
+<div class="active-sessions">
+    @foreach (var session in Model.Sessions)
+    {
+        @await Html.PartialAsync("Shared/Session", session)
+    }
 </div>

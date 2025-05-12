@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Hosting.Server;
+using MySqlConnector;
+
 
 namespace DAL
 {
     class DatabaseManager
     {
-        private readonly string _connectionString = "Server=localhost;Database=your_database_name;Uid=root;Pwd=;";
+        //private readonly string _connectionString;
 
-        public async Task<bool> ConnectionTest() {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                try
-                {
-                    await connection.OpenAsync();
-                    return true;
-                }
-                catch (MySqlException)
-                {
-                    return false;
-                }
-            }
+        public static async Task<MySqlDataReader> Query(MySqlCommand Query) {
+            var connectionString = "Server = localhost; Database = db_ipf; Uid = root; Pwd =; ";
+            var connection = new MySqlConnection(connectionString);
+            Query.Connection = connection;
+            await connection.OpenAsync();
+            MySqlDataReader data = await Query.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+            return data;
+                
+            
         }
     }
 }
