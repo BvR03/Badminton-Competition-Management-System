@@ -6,6 +6,12 @@
 
 <div class="text-center">
     <h2 class="display-4">Log In</h2>
+    @if (!ModelState.IsValid && ModelState.ContainsKey(""))
+    {
+        <div class="alert alert-danger">
+            @ModelState[""].Errors[0].ErrorMessage
+        </div>
+    }
     <form asp-action="Login" method="post">
         <div>
             <label asp-for="Username">Username</label>

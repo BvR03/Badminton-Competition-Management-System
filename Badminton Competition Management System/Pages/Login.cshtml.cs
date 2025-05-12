@@ -1,3 +1,4 @@
+using LogicLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,18 +16,21 @@ namespace Badminton_Competition_Management_System.Pages
         {
         }
 
-        public IActionResult OnPost()
+        // Mark the method as 'async'
+        public async Task<IActionResult> OnPostAsync()
         {
-            // Example login logic – replace with your own
-            if (Username == "admin" && Password == "1234")
+            // Await the VerifyLogin method to get the result
+            bool isLoginValid = await LoginManager.VerifyLogin(Username, Password);
+
+            if (isLoginValid)
             {
                 // Redirect to another page if login is successful
-                return RedirectToPage("Index"); // or any page you want
+                return RedirectToPage("Index"); // Or any page you want to redirect to
             }
 
             // If login fails, show error
             ModelState.AddModelError(string.Empty, "Invalid username or password.");
-            return Page();
+            return Page(); // Return to the current page with the error message in ModelState
         }
     }
 }
