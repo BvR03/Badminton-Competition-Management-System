@@ -5,14 +5,17 @@ namespace Badminton_Competition_Management_System.Pages.Shared
 {
     public class SessionModel : PageModel
     {
-        public string Title { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public string Time { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? TimeFinished { get; set; }
+
         public void OnGet()
         {
-            Title = "Sample Title";
+            Name = "Sample Title";
             Description = "This is a description.";
-            Time = "10:00 AM";
+            StartTime = DateTime.Now;
         }
     }
 }

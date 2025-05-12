@@ -1,11 +1,11 @@
 ﻿@page
-@model IndexModel
+@model Badminton_Competition_Management_System.Pages.FinishedSessionsModel
 @{
-    ViewData["Title"] = "Main view";
+    ViewData["Title"] = "Finished Session";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Active Sessions</h1>
+    <h1 class="display-4">Finished Sessions</h1>
 </div>
 
 <div class="active-sessions">
@@ -13,12 +13,13 @@
     {
         @foreach (var session in Model.Sessions)
         {
-            @await Html.PartialAsync("Shared/Session", session);
+            @await Html.PartialAsync("Shared/Session", session)
+            ;
         }
-    } 
-    else 
+    }
+    else
     {
         <h3><center> No session active </center></h3>
     }
-    
+
 </div>

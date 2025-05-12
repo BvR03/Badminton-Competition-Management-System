@@ -1,4 +1,4 @@
-﻿namespace ClassLibraryLogicLayer
+﻿namespace LogicLayer
 {
     public class Player
     {

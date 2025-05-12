@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Badminton Competition Management System\PresentationLayer.csproj" />
-    <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
     <ProjectReference Include="..\InterfaceNDTOLayer\InterfaceNDTOLayer.csproj" />
   </ItemGroup>
 
