@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton Competition Management System", "Badminton Competition Management System\Badminton Competition Management System.csproj", "{5929521A-178A-4067-B49A-920011AF3339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "Badminton Competition Management System\PresentationLayer.csproj", "{5929521A-178A-4067-B49A-920011AF3339}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "ClassLibraryDAL\DAL.csproj", "{93CC3AA6-ADAB-4511-AEE8-398E60B00693}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayer", "ClassLibraryLogicLayer\LogicLayer.csproj", "{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCMS.Tests", "BCMS.Tests\BCMS.Tests.csproj", "{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceNDTOLayer", "InterfaceNDTOLayer\InterfaceNDTOLayer.csproj", "{AD46722E-DA08-4430-B8AA-72DA84D9E938}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F94DE7CF-F585-4CAB-9CBE-4B96F666ABF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD46722E-DA08-4430-B8AA-72DA84D9E938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD46722E-DA08-4430-B8AA-72DA84D9E938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD46722E-DA08-4430-B8AA-72DA84D9E938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD46722E-DA08-4430-B8AA-72DA84D9E938}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

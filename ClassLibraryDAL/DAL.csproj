@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="9.3.0" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Badminton Competition Management System\Badminton Competition Management System.csproj" />
+    <ProjectReference Include="..\Badminton Competition Management System\PresentationLayer.csproj" />
     <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
+    <ProjectReference Include="..\InterfaceNDTOLayer\InterfaceNDTOLayer.csproj" />
   </ItemGroup>
 
 </Project>

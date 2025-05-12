@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Badminton Competition Management System\PresentationLayer.csproj" />
+    <ProjectReference Include="..\ClassLibraryDAL\DAL.csproj" />
+    <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
