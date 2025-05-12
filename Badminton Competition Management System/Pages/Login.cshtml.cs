@@ -25,6 +25,7 @@ namespace Badminton_Competition_Management_System.Pages
             if (isLoginValid)
             {
                 // Redirect to another page if login is successful
+                HttpContext.Session.SetString("SignedIn", "true");
                 return RedirectToPage("Index"); // Or any page you want to redirect to
             }
 
