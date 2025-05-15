@@ -24,5 +24,14 @@ namespace DAL
                 
             
         }
+        public static async Task<int> ExecuteAsync(MySqlCommand command)
+        {
+            var connectionString = "Server=localhost; Database=db_ipf; Uid=root; Pwd=;";
+            using var connection = new MySqlConnection(connectionString);
+            command.Connection = connection;
+            await connection.OpenAsync();
+            return await command.ExecuteNonQueryAsync(); // returns number of affected rows
+        }
+
     }
 }

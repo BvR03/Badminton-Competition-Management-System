@@ -20,3 +20,44 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .modal {
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1001;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 90%;
+    }
+
+    .modal-content > div {
+        margin-bottom: 1rem;
+    }
+
+    .close-button {
+        float: right;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="number"] {
+        width: 100%;
+        padding: 0.4rem;
+    }
+
+    .modal-content button {
+        margin-right: 0.5rem;
+    }
