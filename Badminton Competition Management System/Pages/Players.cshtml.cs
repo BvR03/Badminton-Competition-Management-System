@@ -1,10 +1,8 @@
 using Badminton_Competition_Management_System.Pages.Shared;
 using InterfaceNDTOLayer;
 using LogicLayer;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Mvc;
 namespace Badminton_Competition_Management_System.Pages
 {
     public class PlayersModel : PageModel
@@ -23,7 +21,7 @@ namespace Badminton_Competition_Management_System.Pages
 
         public List<PlayerModel> Players { get; set; }
 
-        public async Task OnGetAsync()
+        private async Task LoadPlayersAsync()
         {
             Players = new List<PlayerModel>();
             foreach (DTOPlayers myPlayers in await PlayerLogic.FetchPlayersAsync())
@@ -39,6 +37,11 @@ namespace Badminton_Competition_Management_System.Pages
             }
         }
 
+        public async Task OnGetAsync()
+        {
+            await LoadPlayersAsync();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             string Status = await CreationCheck.CanPlayerBeCreated(FirstName, LastName, Gender, FederationNumber);
@@ -48,35 +51,33 @@ namespace Badminton_Competition_Management_System.Pages
                 case "ExistingFederationNumber":
                     ModelState.AddModelError(string.Empty, "A player with this Federation Number already exists.");
                     break;
-
                 case "NoFirstName":
                     ModelState.AddModelError(string.Empty, "First name is required.");
                     break;
-
                 case "NoLastName":
                     ModelState.AddModelError(string.Empty, "Last name is required.");
                     break;
-
                 case "NoFederationNumber":
                     ModelState.AddModelError(string.Empty, "Federation Number is required.");
                     break;
-
                 case "CanCreate":
                     bool success = await PlayerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
                     if (success)
                     {
-                        return RedirectToPage(); // Redirect to the same page or success page
+                        return RedirectToPage();
                     }
                     else
                     {
-                        return RedirectToPage("/Login"); // Or handle failure differently
+                        return Page();
                     }
-
                 default:
                     ModelState.AddModelError(string.Empty, "An unknown error occurred.");
                     break;
             }
+            ViewData["ShowModal"] = true;
+            await LoadPlayersAsync();
             return Page();
         }
     }
 }
+
