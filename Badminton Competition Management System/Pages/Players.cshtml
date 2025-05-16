@@ -1,11 +1,22 @@
 ﻿@page
 @model Badminton_Competition_Management_System.Pages.PlayersModel
+<!--//model Badminton_Competition_Management_System.Pages.Shared.PlayerModel-->
 @{
     ViewData["Title"] = "Player Manager";
 }
 <div class="text-center">
     <button onclick="openModal()">New Player</button>    
     <h1 class="display-4">Players</h1>
+</div>
+<div class="text-center">
+    @if (Model.Players.Count != 0)
+    {
+        @foreach (var Players in Model.Players)
+        {
+            @await Html.PartialAsync("Shared/Player", Players)
+            ;
+        }
+    }
 </div>
 <!-- Modal Background -->
 <div id="modalOverlay" class="modal-overlay" style="display:none;" onclick="closeModal()"></div>

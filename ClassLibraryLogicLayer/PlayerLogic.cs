@@ -10,12 +10,12 @@ namespace LogicLayer
             return Succes;
         }
 
-        public static async Task<List<DTOPlayers>> GetLiveSessionsAsync()
+        public static async Task<List<DTOPlayers>> FetchPlayersAsync()
         {
-            var result = new List<DTOLiveSessions>();
-            await foreach (DTOLiveSessions session in FetchSessionData.FetchSessions())
+            var result = new List<DTOPlayers>();
+            await foreach (DTOPlayers myPlayers in PlayerData.FetchPlayersAsync())
             {
-                result.Add(session);
+                result.Add(myPlayers);
             }
             return result;
         }
