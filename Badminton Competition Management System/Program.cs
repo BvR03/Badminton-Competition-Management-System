@@ -1,3 +1,5 @@
+using LogicLayer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,8 @@ builder.Services.AddRazorPages();
 //  Add this line to fix the error
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
+builder.Services.AddScoped<PlayerLogic>();
+
 
 var app = builder.Build();
 

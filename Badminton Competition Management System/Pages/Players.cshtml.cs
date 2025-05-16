@@ -7,6 +7,12 @@ namespace Badminton_Competition_Management_System.Pages
 {
     public class PlayersModel : PageModel
     {
+        private readonly PlayerLogic _playerLogic;
+
+        public PlayersModel(PlayerLogic playerLogic)
+        {
+            _playerLogic = playerLogic;
+        }
         [BindProperty]
         public string FirstName { get; set; }
 
@@ -24,7 +30,7 @@ namespace Badminton_Competition_Management_System.Pages
         private async Task LoadPlayersAsync()
         {
             Players = new List<PlayerModel>();
-            foreach (DTOPlayers myPlayers in await PlayerLogic.FetchPlayersAsync())
+            foreach (DTOPlayers myPlayers in await _playerLogic.FetchPlayersAsync())
             {
                 Players.Add(new PlayerModel
                 {
@@ -61,15 +67,8 @@ namespace Badminton_Competition_Management_System.Pages
                     ModelState.AddModelError(string.Empty, "Federation Number is required.");
                     break;
                 case "CanCreate":
-                    bool success = await PlayerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
-                    if (success)
-                    {
-                        return RedirectToPage();
-                    }
-                    else
-                    {
-                        return Page();
-                    }
+                    await _playerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
+                    return RedirectToPage();
                 default:
                     ModelState.AddModelError(string.Empty, "An unknown error occurred.");
                     break;

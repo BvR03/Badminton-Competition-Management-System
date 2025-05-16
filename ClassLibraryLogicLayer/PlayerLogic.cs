@@ -2,15 +2,15 @@
 using InterfaceNDTOLayer;
 namespace LogicLayer
 {
-    public static class PlayerLogic
+    public class PlayerLogic
     {
-        public static async Task<bool> CreatePlayer(string FirstName, string LastName, bool Gender, int FederationNumber)
+        public async Task CreatePlayer(string firstName, string lastName, bool gender, int federationNumber)
         {
-            bool Succes = await PlayerData.InsertPlayerAsync(FirstName, LastName, Gender, FederationNumber);
-            return Succes;
+            await PlayerData.InsertPlayerAsync(firstName, lastName, gender, federationNumber);
+            // No return value — assumes validation has already passed
         }
 
-        public static async Task<List<DTOPlayers>> FetchPlayersAsync()
+        public async Task<List<DTOPlayers>> FetchPlayersAsync()
         {
             var result = new List<DTOPlayers>();
             await foreach (DTOPlayers myPlayers in PlayerData.FetchPlayersAsync())
