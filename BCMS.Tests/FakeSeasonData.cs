@@ -13,11 +13,12 @@ public class FakeSeasonData : ISeasonData
         return Task.FromResult(CreatedSeasons);
     }
 
-    public Task InsertSeasonAsync(DateTime start, DateTime end)
+    public Task InsertSeasonAsync(string name, DateTime start, DateTime end)
     {
         CreatedSeasons.Add(new DTOSeasons
         {
             ID = CreatedSeasons.Count + 1,
+            Name = name,
             StartDate = start,
             EndDate = end
         });

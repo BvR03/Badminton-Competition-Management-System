@@ -10,15 +10,15 @@ namespace Badminton_Competition_Management_System.Pages.Shared
 
         public string GetGenderToString()
         {
-            // return this.Gender ? "Male" : "Female"; Alternatieve oplossing ~ Onno
-            if (this.Gender)
+            return this.Gender ? "Male" : "Female"; //Alternatieve oplossing ~ Onno
+            /*if (this.Gender)
             {
                 return "Male";
             }
             else
             {
                 return "Female";
-            }
+            }*/
             
         }
     }
