@@ -1,0 +1,100 @@
+﻿@page
+@model Badminton_Competition_Management_System.Pages.SeasonsModel
+@{
+    ViewData["Title"] = "Season Manager";
+}
+
+<h1>Seasons</h1>
+
+@if (Model.Seasons.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var season in Model.Seasons)
+            {
+                <tr>
+                    <td>@season.Name</td>
+                    <td>@season.StartDate.ToShortDateString()</td>
+                    <td>@season.EndDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No seasons found.</p>
+}
+
+<!-- Modal Trigger Button -->
+<div>
+    <button onclick="openModal()">Create New Season</button>
+</div>
+
+<!-- Modal Overlay -->
+<div id="modalOverlay" class="modal-overlay" style="display:none;" onclick="closeModal()"></div>
+
+<!-- Modal Content -->
+<div id="seasonModal" class="modal" style="display:none;" onclick="event.stopPropagation();">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>Create New Season</h2>
+
+        <form method="post">
+            <div>
+                <label for="Name">Season Name:</label>
+                <input type="text" asp-for="Name" required />
+            </div>
+            <div>
+                <label for="StartDate">Start Date:</label>
+                <input type="date" asp-for="StartDate" required />
+            </div>
+            <div>
+                <label for="EndDate">End Date:</label>
+                <input type="date" asp-for="EndDate" required />
+            </div>
+            <div>
+                <button type="submit">Add Season</button>
+            </div>
+        </form>
+
+        @if (!ModelState.IsValid)
+        {
+            <div style="color:red; margin-top: 10px;">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openModal() {
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.getElementById('seasonModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.getElementById('seasonModal').style.display = 'none';
+        }
+
+        // Auto-open modal if server sets ShowModal = true (e.g. validation error)
+        window.addEventListener('DOMContentLoaded', function () {
+            var shouldShow = '@(ViewData["ShowModal"] ?? "false")'.toLowerCase() === 'true';
+            if (shouldShow) {
+                openModal();
+            }
+        });
+    </script>
+}

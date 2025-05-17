@@ -1,5 +1,6 @@
 using DAL;
 using InterfaceLayer;
+using InterfaceLayer.DALInterfaces;
 using LogicLayer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 builder.Services.AddScoped<PlayerLogic>();
 builder.Services.AddScoped<IPlayerData, PlayerData>();
+builder.Services.AddScoped<ISeasonData, SeasonData>();
+builder.Services.AddScoped<SeasonLogic>();
+
 
 
 
