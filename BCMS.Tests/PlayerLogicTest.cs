@@ -17,15 +17,15 @@ namespace BCMS.Tests
             var logic = new PlayerLogic(fakeData);
 
             // Act
-            await logic.CreatePlayer("John", "Doe", true, 123);
+            await logic.CreatePlayer("Estelle", "van Leeuwen", false, 120950);
 
             // Assert
             Assert.AreEqual(1, fakeData.InsertedPlayers.Count);
             var inserted = fakeData.InsertedPlayers[0];
-            Assert.AreEqual("John", inserted.firstName);
-            Assert.AreEqual("Doe", inserted.lastName);
-            Assert.AreEqual(true, inserted.gender);
-            Assert.AreEqual(123, inserted.federationNumber);
+            Assert.AreEqual("Estelle", inserted.firstName);
+            Assert.AreEqual("van Leeuwen", inserted.lastName);
+            Assert.AreEqual(false, inserted.gender);
+            Assert.AreEqual(120950, inserted.federationNumber);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace BCMS.Tests
             var fakeData = new FakePlayerData();
             fakeData.SetPlayers(new List<DTOPlayers>
             {
-                new DTOPlayers { ID = 1, FirstName = "A", LastName = "B", Gender = true, FederationNumber = 10 }
+                new DTOPlayers { ID = 1, FirstName = "Euan", LastName = "Scivier", Gender = true, FederationNumber = 10 }
             });
 
             var logic = new PlayerLogic(fakeData);
@@ -45,7 +45,7 @@ namespace BCMS.Tests
 
             // Assert
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("A", result[0].FirstName);
+            Assert.AreEqual("Euan", result[0].FirstName);
         }
     }
 }
