@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibraryLogicLayer\LogicLayer.csproj" />
-    <ProjectReference Include="..\InterfaceNDTOLayer\InterfaceNDTOLayer.csproj" />
+    <ProjectReference Include="..\InterfaceNDTOLayer\InterfaceLayer.csproj" />
   </ItemGroup>
 
 </Project>

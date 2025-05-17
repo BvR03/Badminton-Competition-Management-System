@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayer", "ClassLibraryL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCMS.Tests", "BCMS.Tests\BCMS.Tests.csproj", "{1B30E3A4-7822-4AA7-A380-05B5CEA50C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceNDTOLayer", "InterfaceNDTOLayer\InterfaceNDTOLayer.csproj", "{AD46722E-DA08-4430-B8AA-72DA84D9E938}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceLayer", "InterfaceNDTOLayer\InterfaceLayer.csproj", "{AD46722E-DA08-4430-B8AA-72DA84D9E938}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

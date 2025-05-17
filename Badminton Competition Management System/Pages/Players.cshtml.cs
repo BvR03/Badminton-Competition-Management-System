@@ -1,5 +1,5 @@
 using Badminton_Competition_Management_System.Pages.Shared;
-using InterfaceNDTOLayer;
+using InterfaceLayer;
 using LogicLayer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;

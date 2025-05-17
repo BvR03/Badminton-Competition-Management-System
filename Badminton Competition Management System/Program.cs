@@ -1,3 +1,5 @@
+using DAL;
+using InterfaceLayer;
 using LogicLayer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 builder.Services.AddScoped<PlayerLogic>();
+builder.Services.AddScoped<IPlayerData, PlayerData>();
+
 
 
 var app = builder.Build();

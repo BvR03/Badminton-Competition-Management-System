@@ -1,7 +1,7 @@
 using Badminton_Competition_Management_System.Pages.Shared;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using LogicLayer;
-using InterfaceNDTOLayer;
+using InterfaceLayer;
 using System.Threading.Tasks;
 using DAL;
 using MySqlX.XDevAPI.Common;

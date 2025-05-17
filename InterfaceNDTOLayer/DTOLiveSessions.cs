@@ -1,4 +1,4 @@
-﻿namespace InterfaceNDTOLayer
+﻿namespace InterfaceLayer
 {
     public class DTOLiveSessions
     {
