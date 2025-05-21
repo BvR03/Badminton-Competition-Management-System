@@ -17,6 +17,9 @@ builder.Services.AddScoped<ISeasonData, SeasonData>();
 builder.Services.AddScoped<SeasonLogic>();
 builder.Services.AddScoped<ITeamData, TeamData>();
 builder.Services.AddScoped<TeamManager>();
+builder.Services.AddScoped<ISeasonalTeamData, SeasonalTeamData>();
+builder.Services.AddScoped<SeasonalTeamLogic>();
+
 
 
 

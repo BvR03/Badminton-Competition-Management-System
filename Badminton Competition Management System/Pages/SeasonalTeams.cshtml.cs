@@ -1,0 +1,46 @@
+using InterfaceLayer.DTO;
+using InterfaceLayer;
+using LogicLayer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Badminton_Competition_Management_System.Pages
+{
+    public class SeasonalTeamsModel : PageModel
+    {
+        private readonly SeasonalTeamLogic _manager;
+
+        public SeasonalTeamsModel(SeasonalTeamLogic manager)
+        {
+            _manager = manager;
+        }
+
+        public List<DTOSeasons> Seasons { get; set; }
+        public List<DTOTeam> AllTeams { get; set; }
+        public List<DTOSeasonalTeam> SeasonalTeams { get; set; }
+
+        [BindProperty] public int SeasonId { get; set; }
+        [BindProperty] public int TeamId { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            Seasons = await _manager.GetAllSeasonsAsync();
+            AllTeams = await _manager.GetAllTeamsAsync();
+            SeasonalTeams = await _manager.GetAllSeasonalTeamsAsync();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (SeasonId > 0 && TeamId > 0)
+            {
+                await _manager.AddTeamToSeasonAsync(SeasonId, TeamId);
+            }
+
+            return RedirectToPage();
+        }
+    }
+}

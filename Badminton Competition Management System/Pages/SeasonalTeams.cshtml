@@ -1,0 +1,56 @@
+﻿@page
+@model Badminton_Competition_Management_System.Pages.SeasonalTeamsModel
+@{
+    ViewData["Title"] = "Active Teams Manager";
+}
+
+<h1>Seasonal Teams Overview</h1>
+
+@foreach (var season in Model.Seasons)
+{
+    <h3>@season.Name (@season.StartDate.ToShortDateString() - @season.EndDate.ToShortDateString())</h3>
+
+    <ul>
+        @foreach (var team in Model.SeasonalTeams
+       .Where(st => st.SeasonId == season.ID))
+        {
+            <li>@team.TeamName</li>
+        }
+    </ul>
+
+    @if (season.EndDate > DateTime.Now)
+    {
+        <form method="post" class="mb-3">
+            <input type="hidden" name="SeasonId" value="@season.ID" />
+            <label>Add Team:</label>
+
+            @{
+                // Find which teams are already assigned to this season
+                var assignedTeamIds = Model.SeasonalTeams
+                .Where(st => st.SeasonId == season.ID)
+                .Select(st => st.TeamId)
+                .ToHashSet();
+
+                // Get only teams that aren't yet assigned
+                var availableTeams = Model.AllTeams
+                .Where(t => !assignedTeamIds.Contains(t.ID))
+                .ToList();
+            }
+
+            @if (availableTeams.Count > 0)
+            {
+                <select name="TeamId">
+                    @foreach (var team in availableTeams)
+                    {
+                        <option value="@team.ID">@team.Name</option>
+                    }
+                </select>
+                <button type="submit">Assign</button>
+            }
+            else
+            {
+                <p><em>All teams are assigned, please create a new team to add another one.</em></p>
+            }
+        </form>
+    }
+}
