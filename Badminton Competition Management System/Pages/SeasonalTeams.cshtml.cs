@@ -25,6 +25,8 @@ namespace Badminton_Competition_Management_System.Pages
 
         [BindProperty] public int SeasonId { get; set; }
         [BindProperty] public int TeamId { get; set; }
+        [BindProperty] public int RemoveSeasonId { get; set; }
+        [BindProperty] public int RemoveTeamId { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -40,6 +42,11 @@ namespace Badminton_Competition_Management_System.Pages
                 await _manager.AddTeamToSeasonAsync(SeasonId, TeamId);
             }
 
+            return RedirectToPage();
+        }
+        public async Task<IActionResult> OnPostRemoveAsync()
+        {
+            await _manager.RemoveTeamFromSeasonAsync(RemoveSeasonId, RemoveTeamId);
             return RedirectToPage();
         }
     }

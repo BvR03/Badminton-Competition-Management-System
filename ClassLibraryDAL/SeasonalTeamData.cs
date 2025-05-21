@@ -79,5 +79,12 @@ namespace DAL
             cmd.Parameters.AddWithValue("@teamId", teamId);
             await DatabaseManager.ExecuteAsync(cmd);
         }
+        public async Task RemoveTeamFromSeasonAsync(int seasonId, int teamId)
+        {
+            var cmd = new MySqlCommand("DELETE FROM seasonalteams WHERE SeasonId = @seasonId AND TeamId = @teamId");
+            cmd.Parameters.AddWithValue("@seasonId", seasonId);
+            cmd.Parameters.AddWithValue("@teamId", teamId);
+            await DatabaseManager.ExecuteAsync(cmd);
+        }
     }
 }

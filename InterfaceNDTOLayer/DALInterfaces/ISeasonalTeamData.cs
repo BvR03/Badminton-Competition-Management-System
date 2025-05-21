@@ -13,5 +13,6 @@ namespace InterfaceLayer
         Task<List<DTOTeam>> FetchAllTeamsAsync();
         Task<List<DTOSeasonalTeam>> FetchAllSeasonalTeamsAsync();
         Task AddTeamToSeasonAsync(int seasonId, int teamId);
+        Task RemoveTeamFromSeasonAsync(int seasonId, int teamId);
     }
 }

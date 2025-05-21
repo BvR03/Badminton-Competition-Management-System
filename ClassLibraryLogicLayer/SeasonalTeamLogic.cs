@@ -43,5 +43,10 @@ namespace LogicLayer
             var seasons = await _data.FetchAllSeasonsAsync();
             return seasons.Where(s => s.EndDate > DateTime.Now).ToList();
         }
-}
+        public Task RemoveTeamFromSeasonAsync(int seasonId, int teamId)
+        {
+            return _data.RemoveTeamFromSeasonAsync(seasonId, teamId);
+        }
+
+    }
 }

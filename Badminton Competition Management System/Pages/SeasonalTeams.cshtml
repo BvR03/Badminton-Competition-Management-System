@@ -12,9 +12,22 @@
 
     <ul>
         @foreach (var team in Model.SeasonalTeams
-       .Where(st => st.SeasonId == season.ID))
+      .Where(st => st.SeasonId == season.ID))
         {
-            <li>@team.TeamName</li>
+            <li>
+                @team.TeamName
+                @{
+                    var thisSeason = Model.Seasons.FirstOrDefault(s => s.ID == team.SeasonId);
+                    if (thisSeason != null && thisSeason.StartDate > DateTime.Now)
+                    {
+                        <form method="post" asp-page-handler="Remove" style="display:inline;">
+                            <input type="hidden" name="RemoveSeasonId" value="@team.SeasonId" />
+                            <input type="hidden" name="RemoveTeamId" value="@team.TeamId" />
+                            <button type="submit" onclick="return confirm('Remove this team from the season?')">🗑 Remove</button>
+                        </form>
+                    }
+                }
+            </li>
         }
     </ul>
 
@@ -49,8 +62,12 @@
             }
             else
             {
-                <p><em>All teams are assigned, please create a new team to add another one.</em></p>
+                <p><em>All teams are assigned, please <a href="/teams">create a new team</a> to add another one.</em></p>
             }
         </form>
+    }
+    else
+    {
+        <p><em>This season has finished, please <a href="/seasons">create a new season</a> in order to assign teams.</em></p>
     }
 }
