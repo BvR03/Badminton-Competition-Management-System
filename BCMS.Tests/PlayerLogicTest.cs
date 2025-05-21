@@ -15,9 +15,10 @@ namespace BCMS.Tests
             // Arrange
             var fakeData = new FakePlayerData();
             var logic = new PlayerLogic(fakeData);
+            string firstname = "Estelle";
 
             // Act
-            await logic.CreatePlayer("Estelle", "van Leeuwen", false, 120950);
+            await logic.CreatePlayer(firstname, "van Leeuwen", false, 120_950);
 
             // Assert
             Assert.AreEqual(1, fakeData.InsertedPlayers.Count);
