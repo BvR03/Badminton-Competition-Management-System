@@ -16,9 +16,12 @@ namespace BCMS.Tests
             var fakeData = new FakePlayerData();
             var logic = new PlayerLogic(fakeData);
             string firstname = "Estelle";
+            string lastname = "van Leeuwen";
+            bool IsMale = false;
+            int FederationNumber = 120_950;
 
             // Act
-            await logic.CreatePlayer(firstname, "van Leeuwen", false, 120_950);
+            await logic.CreatePlayer(firstname, lastname, IsMale, FederationNumber);
 
             // Assert
             Assert.AreEqual(1, fakeData.InsertedPlayers.Count);
