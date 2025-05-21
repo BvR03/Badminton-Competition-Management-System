@@ -15,6 +15,9 @@ builder.Services.AddScoped<PlayerLogic>();
 builder.Services.AddScoped<IPlayerData, PlayerData>();
 builder.Services.AddScoped<ISeasonData, SeasonData>();
 builder.Services.AddScoped<SeasonLogic>();
+builder.Services.AddScoped<ITeamData, TeamData>();
+builder.Services.AddScoped<TeamManager>();
+
 
 
 
