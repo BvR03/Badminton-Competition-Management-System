@@ -1,6 +1,6 @@
 ﻿namespace InterfaceLayer
 {
-    public class DTOLiveSessions
+    public class LiveSessionsDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }

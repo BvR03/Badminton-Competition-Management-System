@@ -11,14 +11,14 @@ builder.Services.AddRazorPages();
 //  Add this line to fix the error
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
-builder.Services.AddScoped<PlayerLogic>();
-builder.Services.AddScoped<IPlayerData, PlayerData>();
-builder.Services.AddScoped<ISeasonData, SeasonData>();
-builder.Services.AddScoped<SeasonLogic>();
-builder.Services.AddScoped<ITeamData, TeamData>();
-builder.Services.AddScoped<TeamManager>();
-builder.Services.AddScoped<ISeasonalTeamData, SeasonalTeamData>();
-builder.Services.AddScoped<SeasonalTeamLogic>();
+builder.Services.AddScoped<PlayerService>();
+builder.Services.AddScoped<IPlayerRepo, PlayerRepo>();
+builder.Services.AddScoped<ISeasonRepo, SeasonRepo>();
+builder.Services.AddScoped<SeasonService>();
+builder.Services.AddScoped<ITeamRepo, TeamRepo>();
+builder.Services.AddScoped<TeamService>();
+builder.Services.AddScoped<ISeasonalTeamRepo, SeasonalTeamRepo>();
+builder.Services.AddScoped<SeasonalTeamService>();
 
 
 

@@ -14,7 +14,7 @@ namespace BCMS.Tests
         {
             // Arrange
             var fakeData = new FakePlayerData();
-            var logic = new PlayerLogic(fakeData);
+            var logic = new PlayerService(fakeData);
             string firstname = "Estelle";
             string lastname = "van Leeuwen";
             bool IsMale = false;
@@ -37,12 +37,12 @@ namespace BCMS.Tests
         {
             // Arrange
             var fakeData = new FakePlayerData();
-            fakeData.SetPlayers(new List<DTOPlayers>
+            fakeData.SetPlayers(new List<PlayersDTO>
             {
-                new DTOPlayers { ID = 1, FirstName = "Euan", LastName = "Scivier", Gender = true, FederationNumber = 10 }
+                new PlayersDTO { ID = 1, FirstName = "Euan", LastName = "Scivier", Gender = true, FederationNumber = 10 }
             });
 
-            var logic = new PlayerLogic(fakeData);
+            var logic = new PlayerService(fakeData);
 
             // Act
             var result = await logic.FetchPlayersAsync();

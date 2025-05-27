@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using InterfaceLayer;
 
-public class FakePlayerData : IPlayerData
+public class FakePlayerData : IPlayerRepo
 {
     public List<(string firstName, string lastName, bool gender, int federationNumber)> InsertedPlayers { get; } = new();
 
@@ -12,14 +12,14 @@ public class FakePlayerData : IPlayerData
         await Task.CompletedTask;
     }
 
-    private List<DTOPlayers> _playersToReturn = new();
+    private List<PlayersDTO> _playersToReturn = new();
 
-    public void SetPlayers(List<DTOPlayers> players)
+    public void SetPlayers(List<PlayersDTO> players)
     {
         _playersToReturn = players;
     }
 
-    public async IAsyncEnumerable<DTOPlayers> FetchPlayersAsync()
+    public async IAsyncEnumerable<PlayersDTO> FetchPlayersAsync()
     {
         foreach (var p in _playersToReturn)
         {

@@ -10,7 +10,7 @@ namespace LogicLayer
 {
     public static class LoginManager
     {
-        private static readonly IPasswordGrabber _passwordGrabber = new LogInDAL();
+        private static readonly IPasswordService _passwordGrabber = new LoginRepo();
         public static async Task<bool> VerifyLogin(string username, string password)
         {
             string hashedPassword = Hasher.Hash(password);

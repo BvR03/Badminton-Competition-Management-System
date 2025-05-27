@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer.DALInterfaces
 {
-    public interface ISeasonData
+    public interface ISeasonRepo
     {
-        Task<List<DTOSeasons>> FetchSeasonsAsync();
+        Task<List<SeasonsDTO>> FetchSeasonsAsync();
         Task InsertSeasonAsync(string name, DateTime start, DateTime end);
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer
 {
-    public interface ISeasonalTeamData
+    public interface ISeasonalTeamRepo
     {
-        Task<List<DTOSeasons>> FetchAllSeasonsAsync();
-        Task<List<DTOTeam>> FetchAllTeamsAsync();
-        Task<List<DTOSeasonalTeam>> FetchAllSeasonalTeamsAsync();
+        Task<List<SeasonsDTO>> FetchAllSeasonsAsync();
+        Task<List<TeamDTO>> FetchAllTeamsAsync();
+        Task<List<SeasonalTeamDTO>> FetchAllSeasonalTeamsAsync();
         Task AddTeamToSeasonAsync(int seasonId, int teamId);
         Task RemoveTeamFromSeasonAsync(int seasonId, int teamId);
     }

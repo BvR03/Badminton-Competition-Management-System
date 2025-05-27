@@ -4,18 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class FakeSeasonData : ISeasonData
+public class FakeSeasonData : ISeasonRepo
 {
-    public List<DTOSeasons> CreatedSeasons { get; } = new();
+    public List<SeasonsDTO> CreatedSeasons { get; } = new();
 
-    public Task<List<DTOSeasons>> FetchSeasonsAsync()
+    public Task<List<SeasonsDTO>> FetchSeasonsAsync()
     {
         return Task.FromResult(CreatedSeasons);
     }
 
     public Task InsertSeasonAsync(string name, DateTime start, DateTime end)
     {
-        CreatedSeasons.Add(new DTOSeasons
+        CreatedSeasons.Add(new SeasonsDTO
         {
             ID = CreatedSeasons.Count + 1,
             Name = name,

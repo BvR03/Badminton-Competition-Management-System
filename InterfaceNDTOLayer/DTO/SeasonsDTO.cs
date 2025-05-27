@@ -1,6 +1,6 @@
 ﻿namespace InterfaceLayer
 {
-    public class DTOSeasons
+    public class SeasonsDTO
     {
         public int ID { get; set; }
         public string Name { get; set; } = "";

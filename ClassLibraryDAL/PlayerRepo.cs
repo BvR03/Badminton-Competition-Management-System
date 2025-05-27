@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class PlayerData : IPlayerData
+    public class PlayerRepo : IPlayerRepo
     {
         public async Task InsertPlayerAsync(string firstName, string lastName, bool gender, int federationNumber)
         {
@@ -21,12 +21,12 @@ namespace DAL
             await DatabaseManager.ExecuteAsync(command);
         }
 
-        public async IAsyncEnumerable<DTOPlayers> FetchPlayersAsync()
+        public async IAsyncEnumerable<PlayersDTO> FetchPlayersAsync()
         {
             using MySqlDataReader reader = await DatabaseManager.Query(new MySqlCommand("SELECT * FROM players"));
             while (await reader.ReadAsync())
             {
-                yield return new DTOPlayers
+                yield return new PlayersDTO
                 {
                     ID = reader.GetInt32("ID"),
                     FirstName = (string)reader["FirstName"],

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterfaceLayer.DTO
+namespace InterfaceLayer
 {
-    public class DTOTeam
+    public interface IPasswordService
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
+        Task<string?> getPasswordHashByUsername(string username);
     }
 }

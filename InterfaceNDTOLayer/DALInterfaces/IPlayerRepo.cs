@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer
 {
-    public interface IPlayerData
+    public interface IPlayerRepo
     {
         Task InsertPlayerAsync(string firstName, string lastName, bool gender, int federationNumber);
-        IAsyncEnumerable<DTOPlayers> FetchPlayersAsync();
+        IAsyncEnumerable<PlayersDTO> FetchPlayersAsync();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace InterfaceLayer
 {
-    public class DTOFinishedSessions
+    public class FinishedSessionsDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }

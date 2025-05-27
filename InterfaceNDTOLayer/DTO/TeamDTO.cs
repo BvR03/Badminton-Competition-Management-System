@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterfaceLayer
+namespace InterfaceLayer.DTO
 {
-    public interface IPasswordGrabber
+    public class TeamDTO
     {
-        Task<string?> getPasswordHashByUsername(string username);
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

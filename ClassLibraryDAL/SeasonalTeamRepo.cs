@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class SeasonalTeamData : ISeasonalTeamData
+    public class SeasonalTeamRepo : ISeasonalTeamRepo
     {
-        public async Task<List<DTOSeasons>> FetchAllSeasonsAsync()
+        public async Task<List<SeasonsDTO>> FetchAllSeasonsAsync()
         {
-            var list = new List<DTOSeasons>();
+            var list = new List<SeasonsDTO>();
             var cmd = new MySqlCommand("SELECT ID, Name, StartDate, EndDate FROM seasons ORDER BY EndDate DESC");
 
             using var reader = await DatabaseManager.Query(cmd);
             while (await reader.ReadAsync())
             {
-                list.Add(new DTOSeasons
+                list.Add(new SeasonsDTO
                 {
                     ID = reader.GetInt32("ID"),
                     Name = reader.GetString("Name"),
@@ -29,15 +29,15 @@ namespace DAL
             return list;
         }
 
-        public async Task<List<DTOTeam>> FetchAllTeamsAsync()
+        public async Task<List<TeamDTO>> FetchAllTeamsAsync()
         {
-            var list = new List<DTOTeam>();
+            var list = new List<TeamDTO>();
             var cmd = new MySqlCommand("SELECT ID, Name FROM teams");
 
             using var reader = await DatabaseManager.Query(cmd);
             while (await reader.ReadAsync())
             {
-                list.Add(new DTOTeam
+                list.Add(new TeamDTO
                 {
                     ID = reader.GetInt32("ID"),
                     Name = reader.GetString("Name")
@@ -47,9 +47,9 @@ namespace DAL
             return list;
         }
 
-        public async Task<List<DTOSeasonalTeam>> FetchAllSeasonalTeamsAsync()
+        public async Task<List<SeasonalTeamDTO>> FetchAllSeasonalTeamsAsync()
         {
-            var list = new List<DTOSeasonalTeam>();
+            var list = new List<SeasonalTeamDTO>();
             var cmd = new MySqlCommand(@"
                 SELECT st.ID, st.SeasonId, st.TeamId, s.Name AS SeasonName, t.Name AS TeamName
                 FROM seasonalteams st
@@ -59,7 +59,7 @@ namespace DAL
             using var reader = await DatabaseManager.Query(cmd);
             while (await reader.ReadAsync())
             {
-                list.Add(new DTOSeasonalTeam
+                list.Add(new SeasonalTeamDTO
                 {
                     ID = reader.GetInt32("ID"),
                     SeasonId = reader.GetInt32("SeasonId"),

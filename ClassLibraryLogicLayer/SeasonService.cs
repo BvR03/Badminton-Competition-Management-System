@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class SeasonLogic
+    public class SeasonService
     {
-        private readonly ISeasonData _data;
+        private readonly ISeasonRepo _data;
 
-        public SeasonLogic(ISeasonData data)
+        public SeasonService(ISeasonRepo data)
         {
             _data = data;
         }
 
-        public async Task<List<DTOSeasons>> GetSeasonsAsync()
+        public async Task<List<SeasonsDTO>> GetSeasonsAsync()
         {
             return await _data.FetchSeasonsAsync();
         }

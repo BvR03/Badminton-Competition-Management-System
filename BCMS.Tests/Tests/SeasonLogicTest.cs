@@ -14,7 +14,7 @@ namespace BCMS.Tests
         {
             // Arrange
             var fakeData = new FakeSeasonData();
-            var logic = new SeasonLogic(fakeData);
+            var logic = new SeasonService(fakeData);
             string name = "Season 2026/2027";
             DateTime start = new DateTime(2025, 1, 1);
             DateTime end = new DateTime(2025, 3, 31);

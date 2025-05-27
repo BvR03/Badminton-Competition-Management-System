@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class TeamData : ITeamData
+    public class TeamRepo : ITeamRepo
     {
         public async Task AddTeamAsync(string name)
         {
@@ -16,14 +16,14 @@ namespace DAL
             await DatabaseManager.ExecuteAsync(command);
         }
 
-        public async Task<List<DTOTeam>> GetAllTeamsAsync()
+        public async Task<List<TeamDTO>> GetAllTeamsAsync()
         {
-            var teams = new List<DTOTeam>();
+            var teams = new List<TeamDTO>();
             using MySqlDataReader reader = await DatabaseManager.Query(new MySqlCommand("SELECT ID, Name FROM teams ORDER BY Name"));
 
             while (await reader.ReadAsync())
             {
-                teams.Add(new DTOTeam
+                teams.Add(new TeamDTO
                 {
                     ID = reader.GetInt32("ID"),
                     Name = reader.GetString("Name")

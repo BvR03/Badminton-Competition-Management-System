@@ -7,9 +7,9 @@ namespace Badminton_Competition_Management_System.Pages
 {
     public class PlayersModel : PageModel
     {
-        private readonly PlayerLogic _playerLogic;
+        private readonly PlayerService _playerLogic;
 
-        public PlayersModel(PlayerLogic playerLogic)
+        public PlayersModel(PlayerService playerLogic)
         {
             _playerLogic = playerLogic;
         }
@@ -30,7 +30,7 @@ namespace Badminton_Competition_Management_System.Pages
         private async Task LoadPlayersAsync()
         {
             Players = new List<PlayerModel>();
-            foreach (DTOPlayers myPlayers in await _playerLogic.FetchPlayersAsync())
+            foreach (PlayersDTO myPlayers in await _playerLogic.FetchPlayersAsync())
             {
                 Players.Add(new PlayerModel
                 {

@@ -9,7 +9,7 @@ namespace Badminton_Competition_Management_System.Pages
     public class FinishedSessionsModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly FetchSessionsBLL _LiveSessionData = new FetchSessionsBLL();
+        private readonly FetchPlayDayService _LiveSessionData = new FetchPlayDayService();
 
         public FinishedSessionsModel(ILogger<IndexModel> logger)
         {
@@ -21,7 +21,7 @@ namespace Badminton_Competition_Management_System.Pages
         public async Task OnGet()
         {
             Sessions = new List<SessionModel>();
-            foreach (DTOFinishedSessions session in await _LiveSessionData.GetFinishedSessionsAsync())
+            foreach (FinishedSessionsDTO session in await _LiveSessionData.GetFinishedSessionsAsync())
             {
                 Sessions.Add(new SessionModel
                 {

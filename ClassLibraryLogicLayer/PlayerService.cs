@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class PlayerLogic
+    public class PlayerService
     {
-        private readonly IPlayerData _playerData;
+        private readonly IPlayerRepo _playerData;
 
-        public PlayerLogic(IPlayerData playerData)
+        public PlayerService(IPlayerRepo playerData)
         {
             _playerData = playerData;
         }
@@ -18,10 +18,10 @@ namespace LogicLayer
             await _playerData.InsertPlayerAsync(firstName, lastName, gender, federationNumber);
         }
 
-        public async Task<List<DTOPlayers>> FetchPlayersAsync()
+        public async Task<List<PlayersDTO>> FetchPlayersAsync()
         {
-            var result = new List<DTOPlayers>();
-            await foreach (DTOPlayers myPlayers in _playerData.FetchPlayersAsync())
+            var result = new List<PlayersDTO>();
+            await foreach (PlayersDTO myPlayers in _playerData.FetchPlayersAsync())
             {
                 result.Add(myPlayers);
             }

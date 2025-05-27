@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer.DALInterfaces
 {
-    public interface ITeamData
+    public interface ITeamRepo
     {
-        Task<List<DTOTeam>> GetAllTeamsAsync();
+        Task<List<TeamDTO>> GetAllTeamsAsync();
         Task AddTeamAsync(string name);
     }
 }

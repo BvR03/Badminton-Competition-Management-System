@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class SeasonData : ISeasonData
+    public class SeasonRepo : ISeasonRepo
     {
-        public async Task<List<DTOSeasons>> FetchSeasonsAsync()
+        public async Task<List<SeasonsDTO>> FetchSeasonsAsync()
         {
-            var seasons = new List<DTOSeasons>();
+            var seasons = new List<SeasonsDTO>();
             var cmd = new MySqlCommand("SELECT * FROM seasons");
 
             using var reader = await DatabaseManager.Query(cmd);
             while (await reader.ReadAsync())
             {
-                seasons.Add(new DTOSeasons
+                seasons.Add(new SeasonsDTO
                 {
                     ID = reader.GetInt32("ID"),
                     Name = reader.GetString("Name"),

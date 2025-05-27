@@ -9,7 +9,7 @@ using MySqlX.XDevAPI.Common;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    private readonly FetchSessionsBLL _LiveSessionData = new FetchSessionsBLL();
+    private readonly FetchPlayDayService _LiveSessionData = new FetchPlayDayService();
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -21,7 +21,7 @@ public class IndexModel : PageModel
     public async Task OnGet()
     {
         Sessions = new List<SessionModel>();
-        foreach (DTOLiveSessions session in await _LiveSessionData.GetLiveSessionsAsync())
+        foreach (LiveSessionsDTO session in await _LiveSessionData.GetLiveSessionsAsync())
         {
             Sessions.Add( new SessionModel 
             {

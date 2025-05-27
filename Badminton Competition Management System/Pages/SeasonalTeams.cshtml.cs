@@ -12,16 +12,16 @@ namespace Badminton_Competition_Management_System.Pages
 {
     public class SeasonalTeamsModel : PageModel
     {
-        private readonly SeasonalTeamLogic _manager;
+        private readonly SeasonalTeamService _manager;
 
-        public SeasonalTeamsModel(SeasonalTeamLogic manager)
+        public SeasonalTeamsModel(SeasonalTeamService manager)
         {
             _manager = manager;
         }
 
-        public List<DTOSeasons> Seasons { get; set; }
-        public List<DTOTeam> AllTeams { get; set; }
-        public List<DTOSeasonalTeam> SeasonalTeams { get; set; }
+        public List<SeasonsDTO> Seasons { get; set; }
+        public List<TeamDTO> AllTeams { get; set; }
+        public List<SeasonalTeamDTO> SeasonalTeams { get; set; }
 
         [BindProperty] public int SeasonId { get; set; }
         [BindProperty] public int TeamId { get; set; }

@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class SeasonalTeamLogic
+    public class SeasonalTeamService
     {
-        private readonly ISeasonalTeamData _data;
+        private readonly ISeasonalTeamRepo _data;
 
-        public SeasonalTeamLogic(ISeasonalTeamData data)
+        public SeasonalTeamService(ISeasonalTeamRepo data)
         {
             _data = data;
         }
 
-        public Task<List<DTOSeasons>> GetAllSeasonsAsync()
+        public Task<List<SeasonsDTO>> GetAllSeasonsAsync()
         {
             return _data.FetchAllSeasonsAsync();
         }
 
-        public Task<List<DTOTeam>> GetAllTeamsAsync()
+        public Task<List<TeamDTO>> GetAllTeamsAsync()
         {
             return _data.FetchAllTeamsAsync();
         }
 
-        public Task<List<DTOSeasonalTeam>> GetAllSeasonalTeamsAsync()
+        public Task<List<SeasonalTeamDTO>> GetAllSeasonalTeamsAsync()
         {
             return _data.FetchAllSeasonalTeamsAsync();
         }
@@ -38,7 +38,7 @@ namespace LogicLayer
         }
 
         // Optional helper for UI logic
-        public async Task<List<DTOSeasons>> GetActiveSeasonsAsync()
+        public async Task<List<SeasonsDTO>> GetActiveSeasonsAsync()
         {
             var seasons = await _data.FetchAllSeasonsAsync();
             return seasons.Where(s => s.EndDate > DateTime.Now).ToList();

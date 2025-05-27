@@ -9,14 +9,14 @@ namespace Badminton_Competition_Management_System.Pages
 {
     public class TeamsModel : PageModel
     {
-        private readonly TeamManager _teamManager;
+        private readonly TeamService _teamManager;
 
-        public TeamsModel(TeamManager teamManager)
+        public TeamsModel(TeamService teamManager)
         {
             _teamManager = teamManager;
         }
 
-        public List<DTOTeam> Teams { get; set; } = new();
+        public List<TeamDTO> Teams { get; set; } = new();
 
         [BindProperty]
         public string TeamName { get; set; }

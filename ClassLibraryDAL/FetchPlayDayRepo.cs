@@ -8,14 +8,14 @@ using MySqlConnector;
 
 namespace DAL
 {
-    public class FetchSessionData
+    public class FetchPlayDayRepo
     {
-        public static async IAsyncEnumerable<DTOLiveSessions> FetchSessions()
+        public static async IAsyncEnumerable<LiveSessionsDTO> FetchSessions()
         {
             using MySqlDataReader reader = await DatabaseManager.Query(new MySqlCommand("SELECT * FROM session WHERE TimeFinished IS NULL"));
             while (await reader.ReadAsync())
             {
-                yield return new DTOLiveSessions 
+                yield return new LiveSessionsDTO 
                 {
                     ID = reader.GetInt32("ID"),
                     Name = (string)reader["Name"],
@@ -24,12 +24,12 @@ namespace DAL
                 };
             }
         }
-        public static async IAsyncEnumerable<DTOFinishedSessions> FetchFinishedSessions()
+        public static async IAsyncEnumerable<FinishedSessionsDTO> FetchFinishedSessions()
         {
             using MySqlDataReader reader = await DatabaseManager.Query(new MySqlCommand("SELECT * FROM session WHERE TimeFinished IS NOT NULL"));
             while (await reader.ReadAsync())
             {
-                yield return new DTOFinishedSessions
+                yield return new FinishedSessionsDTO
                 {
                     ID = reader.GetInt32("ID"),
                     Name = (string)reader["Name"],

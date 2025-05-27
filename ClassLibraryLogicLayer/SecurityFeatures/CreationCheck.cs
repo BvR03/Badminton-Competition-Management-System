@@ -12,7 +12,7 @@ namespace LogicLayer
         public static async Task<string> CanPlayerBeCreated(string FirstName, string LastName, bool Gender, int FederationNumber)
         {
 
-            bool success = await PlayerData.ExistingFederationNumber(FederationNumber);
+            bool success = await PlayerRepo.ExistingFederationNumber(FederationNumber);
 
             if (success)
             {

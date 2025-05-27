@@ -10,14 +10,14 @@ namespace Badminton_Competition_Management_System.Pages
 {
     public class SeasonsModel : PageModel
     {
-        private readonly SeasonLogic _seasonLogic;
+        private readonly SeasonService _seasonLogic;
 
-        public SeasonsModel(SeasonLogic seasonLogic)
+        public SeasonsModel(SeasonService seasonLogic)
         {
             _seasonLogic = seasonLogic;
         }
 
-        public List<DTOSeasons> Seasons { get; set; } = new();
+        public List<SeasonsDTO> Seasons { get; set; } = new();
 
         [BindProperty]
         public string Name { get; set; }

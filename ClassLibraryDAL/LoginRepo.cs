@@ -5,7 +5,7 @@ using MySqlConnector;
 
 namespace DAL
 {
-    public class LogInDAL : IPasswordGrabber
+    public class LoginRepo : IPasswordService
     {
         public async Task<string?> getPasswordHashByUsername(string username)
         {

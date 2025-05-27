@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace LogicLayer
 {
-    public class TeamManager
+    public class TeamService
     {
-        private readonly ITeamData _data;
+        private readonly ITeamRepo _data;
 
-        public TeamManager(ITeamData data)
+        public TeamService(ITeamRepo data)
         {
             _data = data;
         }
 
-        public Task<List<DTOTeam>> GetTeamsAsync()
+        public Task<List<TeamDTO>> GetTeamsAsync()
         {
             return _data.GetAllTeamsAsync();
         }

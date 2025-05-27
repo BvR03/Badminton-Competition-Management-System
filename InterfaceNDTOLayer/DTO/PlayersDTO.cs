@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer
 {
-    public class DTOPlayers
+    public class PlayersDTO
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
