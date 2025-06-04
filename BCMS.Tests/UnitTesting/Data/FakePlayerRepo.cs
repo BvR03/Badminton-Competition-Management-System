@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using InterfaceLayer;
 
-public class FakePlayerData : IPlayerRepo
+public class FakePlayerRepo : IPlayerRepo
 {
     public List<(string firstName, string lastName, bool gender, int federationNumber)> InsertedPlayers { get; } = new();
 

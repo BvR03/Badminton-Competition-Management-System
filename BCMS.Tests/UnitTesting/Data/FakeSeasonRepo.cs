@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class FakeSeasonData : ISeasonRepo
+public class FakeSeasonRepo : ISeasonRepo
 {
     public List<SeasonsDTO> CreatedSeasons { get; } = new();
 
