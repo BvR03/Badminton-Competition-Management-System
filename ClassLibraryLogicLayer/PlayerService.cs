@@ -18,6 +18,7 @@ namespace LogicLayer
             await _playerData.InsertPlayerAsync(firstName, lastName, gender, federationNumber);
         }
 
+
         public async Task<List<PlayersDTO>> FetchPlayersAsync()
         {
             var result = new List<PlayersDTO>();
@@ -26,6 +27,11 @@ namespace LogicLayer
                 result.Add(myPlayers);
             }
             return result;
+        }
+
+        public async Task UpdatePlayerByFederationNumber(string firstName, string lastName, bool gender, int federationNumber)
+        {
+            await _playerData.UpdatePlayerAsync(firstName, lastName, gender, federationNumber);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Badminton_Competition_Management_System.Pages
             _playerLogic = playerLogic;
         }
         [BindProperty]
+        public int? PlayerID { get; set; }
+        [BindProperty]
         public string FirstName { get; set; }
 
         [BindProperty]
@@ -48,34 +50,43 @@ namespace Badminton_Competition_Management_System.Pages
             await LoadPlayersAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostCreateAsync()
         {
             string Status = await CreationCheck.CanPlayerBeCreated(FirstName, LastName, Gender, FederationNumber);
 
             switch (Status)
             {
+                case "CanCreate":
+                    await _playerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
+                    return RedirectToPage();
                 case "ExistingFederationNumber":
                     ModelState.AddModelError(string.Empty, "A player with this Federation Number already exists.");
                     break;
                 case "NoFirstName":
-                    ModelState.AddModelError(string.Empty, "First name is required.");
-                    break;
                 case "NoLastName":
-                    ModelState.AddModelError(string.Empty, "Last name is required.");
-                    break;
                 case "NoFederationNumber":
-                    ModelState.AddModelError(string.Empty, "Federation Number is required.");
+                    ModelState.AddModelError(string.Empty, "All fields are required.");
                     break;
-                case "CanCreate":
-                    await _playerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
-                    return RedirectToPage();
                 default:
-                    ModelState.AddModelError(string.Empty, "An unknown error occurred.");
+                    ModelState.AddModelError(string.Empty, "Unknown error.");
                     break;
             }
-            ViewData["ShowModal"] = true;
+
             await LoadPlayersAsync();
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostEditAsync()
+        {
+            //if (FederationNumber != null)
+            //{
+                await _playerLogic.UpdatePlayerByFederationNumber(FirstName, LastName, Gender, FederationNumber);
+                return RedirectToPage();
+            //}
+
+            //ModelState.AddModelError(string.Empty, "Invalid player edit attempt.");
+            //await LoadPlayersAsync();
+            //return Page();
         }
     }
 }

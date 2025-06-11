@@ -10,5 +10,6 @@ namespace InterfaceLayer
     {
         Task InsertPlayerAsync(string firstName, string lastName, bool gender, int federationNumber);
         IAsyncEnumerable<PlayersDTO> FetchPlayersAsync();
+        Task UpdatePlayerAsync(string firstName, string lastName, bool gender, int federationNumber);
     }
 }

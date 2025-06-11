@@ -1,75 +1,142 @@
 ﻿@page
 @model Badminton_Competition_Management_System.Pages.PlayersModel
-<!--//model Badminton_Competition_Management_System.Pages.Shared.PlayerModel-->
 @{
     ViewData["Title"] = "Player Manager";
 }
+
 <div class="text-center">
-    <button onclick="openModal()">New Player</button>    
+    <button onclick="openCreateModal()">New Player</button>
     <h1 class="display-4">Players</h1>
 </div>
+
 <div class="text-center">
     @if (Model.Players.Count != 0)
     {
-        @foreach (var Players in Model.Players)
-        {
-            @await Html.PartialAsync("Shared/Player", Players)
-            ;
-        }
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Federation Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model.Players)
+                {
+                    <tr>
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@(player.Gender ? "Male" : "Female")</td>
+                        <td>@player.FederationNumber</td>
+                        <td>
+                            <button onclick="openEditModal(@player.ID, '@player.FirstName', '@player.LastName', @(player.Gender.ToString().ToLower()), @player.FederationNumber)">Edit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 </div>
-<!-- Modal Background -->
-<div id="modalOverlay" class="modal-overlay" style="display:none;" onclick="closeModal()"></div>
 
-<!-- Modal Content -->
-<div id="playerModal" class="modal" style="display:none;">
+<!-- Modal Overlay -->
+<div id="modalOverlay" class="modal-overlay" style="display:none;" onclick="closeModals()"></div>
+
+<!-- Create Player Modal -->
+<div id="createModal" class="modal" style="display:none;">
     <div class="modal-content" onclick="event.stopPropagation();">
-        <span class="close-button" onclick="closeModal()">&times;</span>
+        <span class="close-button" onclick="closeModals()">&times;</span>
         <h2>Create New Player</h2>
-        <form method="post">
+        <form method="post" asp-page-handler="Create">
             <div>
                 <label for="FirstName">First Name:</label>
-                <input type="text" id="FirstName" name="FirstName" value="@Model.FirstName" required />
+                <input type="text" id="FirstName" name="FirstName" required />
             </div>
             <div>
                 <label for="LastName">Last Name:</label>
-                <input type="text" id="LastName" name="LastName" value="@Model.LastName" required />
+                <input type="text" id="LastName" name="LastName" required />
             </div>
             <div>
                 <label>Gender:</label>
-                <label>
-                    <input type="radio" name="Gender" value="true" @(Model.Gender ? "checked" : "") required /> Male
-                </label>
-                <label>
-                    <input type="radio" name="Gender" value="false" @(!Model.Gender ? "checked" : "") required /> Female
-                </label>
+                <label><input type="radio" name="Gender" value="true" required /> Male</label>
+                <label><input type="radio" name="Gender" value="false" required /> Female</label>
             </div>
             <div>
                 <label for="FederationNumber">Federation Number:</label>
-                <input type="number" id="FederationNumber" name="FederationNumber" value="@Model.FederationNumber" required />
+                <input type="number" id="FederationNumber" name="FederationNumber" required />
             </div>
             <div>
                 <button type="submit">Create</button>
-                <button type="button" onclick="closeModal()">Cancel</button>
+                <button type="button" onclick="closeModals()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Player Modal -->
+<div id="editModal" class="modal" style="display:none;">
+    <div class="modal-content" onclick="event.stopPropagation();">
+        <span class="close-button" onclick="closeModals()">&times;</span>
+        <h2>Edit Player</h2>
+        <form method="post" asp-page-handler="Edit">
+            <input type="hidden" id="EditPlayerID" name="PlayerID" />
+            <div>
+                <label for="EditFirstName">First Name:</label>
+                <input type="text" id="EditFirstName" name="FirstName" required />
+            </div>
+            <div>
+                <label for="EditLastName">Last Name:</label>
+                <input type="text" id="EditLastName" name="LastName" required />
+            </div>
+            <div>
+                <label>Gender:</label>
+                <label><input type="radio" name="Gender" value="true" /> Male</label>
+                <label><input type="radio" name="Gender" value="false" /> Female</label>
+            </div>
+            <div>
+                <label for="EditFederationNumber">Federation Number:</label>
+                <input type="number" id="EditFederationNumber" name="FederationNumber" readonly />
+            </div>
+            <div>
+                <button type="submit">Save</button>
+                <button type="button" onclick="closeModals()">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-    function openModal() {
+    function openCreateModal() {
+        closeModals();
         document.getElementById('modalOverlay').style.display = 'block';
-        document.getElementById('playerModal').style.display = 'block';
+        document.getElementById('createModal').style.display = 'block';
+
+        // clear previous values
+        document.getElementById('FirstName').value = '';
+        document.getElementById('LastName').value = '';
+        document.getElementById('FederationNumber').value = '';
+        document.querySelectorAll('#createModal input[name="Gender"]').forEach(el => el.checked = false);
     }
 
-    function closeModal() {
-        document.getElementById('modalOverlay').style.display = 'none';
-        document.getElementById('playerModal').style.display = 'none';
-    }
-    window.addEventListener('DOMContentLoaded', function () {
-            var shouldShow = '@(ViewData["ShowModal"] ?? "false")'.toLowerCase() === 'true';
-            if (shouldShow) {
-                openModal(); // your existing JS function
-            }
+    function openEditModal(id, firstName, lastName, gender, federationNumber) {
+        closeModals();
+        document.getElementById('modalOverlay').style.display = 'block';
+        document.getElementById('editModal').style.display = 'block';
+
+        document.getElementById('EditPlayerID').value = id;
+        document.getElementById('EditFirstName').value = firstName;
+        document.getElementById('EditLastName').value = lastName;
+        document.getElementById('EditFederationNumber').value = federationNumber;
+
+        document.querySelectorAll('#editModal input[name="Gender"]').forEach(el => {
+            el.checked = el.value === gender.toString();
         });
+    }
+
+    function closeModals() {
+        document.getElementById('modalOverlay').style.display = 'none';
+        document.getElementById('createModal').style.display = 'none';
+        document.getElementById('editModal').style.display = 'none';
+    }
 </script>

@@ -20,8 +20,9 @@ namespace LogicLayer
 
                 StringBuilder hashBuilder = new StringBuilder();
                 foreach (byte b in hashBytes)
+                {
                     hashBuilder.Append(b.ToString("x2"));
-
+                }
                 string hash = hashBuilder.ToString();
                 return hash;
             }

@@ -20,6 +20,17 @@ namespace DAL
 
             await DatabaseManager.ExecuteAsync(command);
         }
+        public async Task UpdatePlayerAsync(string firstName, string lastName, bool gender, int federationNumber)
+        {
+            using var command = new MySqlCommand(@"
+                UPDATE players  SET FirstName = @firstName, LastName = @lastName,Gender = @gender WHERE FederationNumber = @federationNumber");
+            command.Parameters.AddWithValue("@firstName", firstName);
+            command.Parameters.AddWithValue("@lastName", lastName);
+            command.Parameters.AddWithValue("@gender", gender);
+            command.Parameters.AddWithValue("@federationNumber", federationNumber);
+
+            await DatabaseManager.ExecuteAsync(command);
+        }
 
         public async IAsyncEnumerable<PlayersDTO> FetchPlayersAsync()
         {
