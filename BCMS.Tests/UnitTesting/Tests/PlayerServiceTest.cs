@@ -19,9 +19,10 @@ namespace BCMS.Tests
             string lastname = "van Leeuwen";
             bool IsMale = false;
             int FederationNumber = 120_950;
+            string Email = null;
 
             // Act
-            await logic.CreatePlayer(firstname, lastname, IsMale, FederationNumber);
+            await logic.CreatePlayer(firstname, lastname, IsMale, FederationNumber, Email);
 
             // Assert
             Assert.AreEqual(1, fakeData.InsertedPlayers.Count);

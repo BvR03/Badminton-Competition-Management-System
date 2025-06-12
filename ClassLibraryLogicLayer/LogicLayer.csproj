@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BCM.InfrastructureLayer\BCM.InfrastructureLayer.csproj" />
     <ProjectReference Include="..\ClassLibraryDAL\DAL.csproj" />
     <ProjectReference Include="..\InterfaceNDTOLayer\InterfaceLayer.csproj" />
   </ItemGroup>

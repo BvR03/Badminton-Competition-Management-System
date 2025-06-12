@@ -7,6 +7,7 @@ namespace Badminton_Competition_Management_System.Pages.Shared
         public string LastName { get; set; }
         public bool Gender { get ; set; }
         public int FederationNumber { get; set; }
+        public string? Email { get; set; }
 
         public string GetGenderToString()
         {

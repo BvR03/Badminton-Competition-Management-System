@@ -1,4 +1,5 @@
-﻿using InterfaceLayer;
+﻿using DAL;
+using InterfaceLayer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,9 +14,9 @@ namespace LogicLayer
             _playerData = playerData;
         }
 
-        public async Task CreatePlayer(string firstName, string lastName, bool gender, int federationNumber)
+        public async Task CreatePlayer(string firstName, string lastName, bool gender, int federationNumber, string email)
         {
-            await _playerData.InsertPlayerAsync(firstName, lastName, gender, federationNumber);
+            await _playerData.InsertPlayerAsync(firstName, lastName, gender, federationNumber, email);
         }
 
 
@@ -29,10 +30,15 @@ namespace LogicLayer
             return result;
         }
 
-        public async Task UpdatePlayerByFederationNumber(string firstName, string lastName, bool gender, int federationNumber)
+        public async Task UpdatePlayerByFederationNumber(string firstName, string lastName, bool gender, int federationNumber, string email)
         {
-            await _playerData.UpdatePlayerAsync(firstName, lastName, gender, federationNumber);
+            await _playerData.UpdatePlayerAsync(firstName, lastName, gender, federationNumber, email);
         }
+        public async Task<PlayersDTO?> FetchPlayerByFederationNumberAsync(int fedNumber)
+        {
+            return await _playerData.GetByFederationNumberAsync(fedNumber);
+        }
+
     }
 }
 

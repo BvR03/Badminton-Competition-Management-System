@@ -13,6 +13,7 @@ namespace InterfaceLayer
         public string LastName { get; set; }
         public bool Gender { get; set; }
         public int FederationNumber { get; set; }
+        public string Email { get; set; }
 
     }
 }

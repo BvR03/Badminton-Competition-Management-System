@@ -4,11 +4,11 @@ using InterfaceLayer;
 
 public class FakePlayerRepo : IPlayerRepo
 {
-    public List<(string firstName, string lastName, bool gender, int federationNumber)> InsertedPlayers { get; } = new();
+    public List<(string firstName, string lastName, bool gender, int federationNumber, string email)> InsertedPlayers { get; } = new();
 
-    public async Task InsertPlayerAsync(string firstName, string lastName, bool gender, int federationNumber)
+    public async Task InsertPlayerAsync(string firstName, string lastName, bool gender, int federationNumber, string email)
     {
-        InsertedPlayers.Add((firstName, lastName, gender, federationNumber));
+        InsertedPlayers.Add((firstName, lastName, gender, federationNumber, email));
         await Task.CompletedTask;
     }
 
@@ -26,5 +26,9 @@ public class FakePlayerRepo : IPlayerRepo
             yield return p;
             await Task.Yield();
         }
+    }
+    public async Task UpdatePlayerAsync(string firstName, string lastName, bool gender, int federationNumber, string email)
+    {
+        
     }
 }

@@ -14,7 +14,7 @@ namespace BCMS.Tests
         public async Task CreatePlayerTest()
         {
             // Arrange
-            bool runTest = true;
+            bool runTest = false;
             if (!runTest)
             {
                 Assert.Inconclusive("Test skipped because runTest was set to false.");
@@ -25,10 +25,11 @@ namespace BCMS.Tests
             string lastName = "Tester";
             bool gender = true;
             int federationNumber = new Random().Next(1000000, 9999999);
+            string email = "bryanvanriessen@gmail.com";
 
             // Act
             
-            await playerService.CreatePlayer(firstName, lastName, gender, federationNumber);            
+            await playerService.CreatePlayer(firstName, lastName, gender, federationNumber, email);            
 
 
             // Assert

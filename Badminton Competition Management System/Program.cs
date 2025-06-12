@@ -2,6 +2,7 @@ using DAL;
 using InterfaceLayer;
 using InterfaceLayer.DALInterfaces;
 using LogicLayer;
+using BCM.InfrastructureLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,11 @@ builder.Services.AddScoped<ITeamRepo, TeamRepo>();
 builder.Services.AddScoped<TeamService>();
 builder.Services.AddScoped<ISeasonalTeamRepo, SeasonalTeamRepo>();
 builder.Services.AddScoped<SeasonalTeamService>();
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<IMatchRepo, MatchRepo>();
+builder.Services.AddScoped<MatchService>();
+builder.Services.AddScoped<EmailHandler>();
+builder.Services.AddScoped<EmailPasswordService>();
 
 
 

@@ -1,0 +1,51 @@
+﻿@page
+@model PlayerMatchesModel
+@{
+    ViewData["Title"] = "Player Matches";
+}
+
+<h2>Matches played by @Model.PlayerName</h2>
+
+@if (Model.Matches.Count == 0)
+{
+    <p>No matches found for this player.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Partner</th>
+                <th>Opponent</th>
+                <th>Opponent 2</th>
+                <th>Set 1</th>
+                <th>Set 2</th>
+                <th>Set 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.Matches)
+            {
+                <tr>
+                    <td>@m.Player1Name</td>
+                    <td>@(string.IsNullOrWhiteSpace(m.PartnerName) ? "-" : m.PartnerName)</td>
+                    <td>@m.OpponentName</td>
+                    <td>@(!string.IsNullOrWhiteSpace(m.OpponentNameP2) ? m.OpponentNameP2 : "-")</td>
+                    <td>@m.ScoreHomeSet1 - @m.ScoreAwaySet1</td>
+                    <td>@m.ScoreHomeSet2 - @m.ScoreAwaySet2</td>
+                    <td>
+                        @if (m.ScoreHomeSet3.HasValue && m.ScoreAwaySet3.HasValue)
+                        {
+                            @($"{m.ScoreHomeSet3} - {m.ScoreAwaySet3}")
+                        }
+                        else
+                        {
+                            @("-")
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

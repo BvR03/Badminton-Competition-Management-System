@@ -23,7 +23,13 @@ namespace Badminton_Competition_Management_System.Pages
 
         [BindProperty]
         public bool Gender { get; set; }
+        [BindProperty]
+        public string Email { get; set; }
+        [BindProperty]
+        public string Subject { get; set; }
 
+        [BindProperty]
+        public string Message { get; set; }
         [BindProperty]
         public int FederationNumber { get; set; }
 
@@ -40,7 +46,8 @@ namespace Badminton_Competition_Management_System.Pages
                     FirstName = myPlayers.FirstName,
                     LastName = myPlayers.LastName,
                     Gender = myPlayers.Gender,
-                    FederationNumber = myPlayers.FederationNumber
+                    FederationNumber = myPlayers.FederationNumber,
+                    Email = myPlayers.Email
                 });
             }
         }
@@ -57,7 +64,7 @@ namespace Badminton_Competition_Management_System.Pages
             switch (Status)
             {
                 case "CanCreate":
-                    await _playerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber);
+                    await _playerLogic.CreatePlayer(FirstName, LastName, Gender, FederationNumber, Email);
                     return RedirectToPage();
                 case "ExistingFederationNumber":
                     ModelState.AddModelError(string.Empty, "A player with this Federation Number already exists.");
@@ -80,13 +87,19 @@ namespace Badminton_Competition_Management_System.Pages
         {
             //if (FederationNumber != null)
             //{
-                await _playerLogic.UpdatePlayerByFederationNumber(FirstName, LastName, Gender, FederationNumber);
+                await _playerLogic.UpdatePlayerByFederationNumber(FirstName, LastName, Gender, FederationNumber, Email);
                 return RedirectToPage();
             //}
 
             //ModelState.AddModelError(string.Empty, "Invalid player edit attempt.");
             //await LoadPlayersAsync();
             //return Page();
+        }
+        public async Task<IActionResult> OnPostSendEmailAsync()
+        {
+            var emailService = new EmailService();
+            emailService.SetUpEmail(Subject, Email, Message);
+            return RedirectToPage();
         }
     }
 }
