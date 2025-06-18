@@ -3,6 +3,7 @@ using InterfaceLayer;
 using InterfaceLayer.DALInterfaces;
 using LogicLayer;
 using BCM.InfrastructureLayer;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,9 +35,42 @@ builder.Services.AddScoped<EmailPasswordService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            context.Response.StatusCode = 500;
+            context.Response.ContentType = "text/plain";
+
+            var exceptionFeature = context.Features.Get<IExceptionHandlerFeature>();
+            var error = exceptionFeature?.Error;
+
+            if (error != null)
+            {
+                try
+                {
+                    var emailService = context.RequestServices.GetRequiredService<EmailService>();
+                    await Task.Run(() =>
+                    {
+                        emailService.SetUpEmail(
+                            "Unhandled Exception in BCM",
+                            "bvrhelpdesk3@gmail.com",
+                            $"Exception: {error.Message}\n\nStackTrace:\n{error.StackTrace}"
+                        );
+                    });
+                }
+                catch
+                {
+                    // Fail silently if even the email fails — avoid nested errors
+                }
+            }
+
+            context.Response.Redirect("/Error");
+        });
+    });
+
     app.UseHsts();
 }
 
