@@ -27,7 +27,7 @@ namespace BCMS.Tests
             // Assert
             Assert.AreEqual(1, fakeData.InsertedPlayers.Count);
             var inserted = fakeData.InsertedPlayers[0];
-            Assert.AreEqual("Estellx", inserted.firstName);
+            Assert.AreEqual("Estelle", inserted.firstName);
             Assert.AreEqual("van Leeuwen", inserted.lastName);
             Assert.AreEqual(false, inserted.gender);
             Assert.AreEqual(120950, inserted.federationNumber);

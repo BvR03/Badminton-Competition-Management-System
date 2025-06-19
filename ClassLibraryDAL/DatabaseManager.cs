@@ -10,44 +10,29 @@ using MySqlConnector;
 
 namespace DAL
 {
-    class DatabaseManager
+    public static class DatabaseManager
     {
-        //private readonly string _connectionString;
-        public static bool Dev = true;
-        private static readonly string DefaultConnection;
-        private static readonly string LocalConnection;
-        public static string GetConnectionString()
+        private static string _connectionString;
+
+        public static void SetConnectionString(string connectionString)
         {
-            if (Dev)
-            {
-                return("Server = localhost; Database = db_ipf; Uid = root; Pwd =;");
-            }
-            else
-            {
-                return ("Server=sql.freedb.tech; Database=freedb_thebvr_BCM; Uid=freedb_thebvr_BCM; Pwd=hsU%mR2v3a4%MKj;");
-            }
+            _connectionString = connectionString;
         }
 
-        public static async Task<MySqlDataReader> Query(MySqlCommand Query) {
-            //var connectionString = "Server = localhost; Database = db_ipf; Uid = root; Pwd =; ";
-            //var connection = new MySqlConnection(connectionString);
-            var connection = new MySqlConnection(GetConnectionString());
-            Query.Connection = connection;
+        public static async Task<MySqlDataReader> Query(MySqlCommand query)
+        {
+            var connection = new MySqlConnection(_connectionString);
+            query.Connection = connection;
             await connection.OpenAsync();
-            MySqlDataReader data = await Query.ExecuteReaderAsync(CommandBehavior.CloseConnection);
-            return data;
-                
-            
+            return await query.ExecuteReaderAsync(CommandBehavior.CloseConnection);
         }
+
         public static async Task<int> ExecuteAsync(MySqlCommand command)
         {
-            //var connectionString = "Server=localhost; Database=db_ipf; Uid=root; Pwd=;";
-            //var connection = new MySqlConnection(connectionString);
-            var connection = new MySqlConnection(GetConnectionString());
+            var connection = new MySqlConnection(_connectionString);
             command.Connection = connection;
             await connection.OpenAsync();
-            return await command.ExecuteNonQueryAsync(); // returns number of affected rows
+            return await command.ExecuteNonQueryAsync();
         }
-
     }
 }

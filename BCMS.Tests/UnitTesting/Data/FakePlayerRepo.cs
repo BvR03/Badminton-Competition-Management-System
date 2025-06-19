@@ -31,4 +31,14 @@ public class FakePlayerRepo : IPlayerRepo
     {
         
     }
+    public Task<PlayersDTO?> GetByFederationNumberAsync(int federationNumber)
+    {
+        var player = _playersToReturn.Find(p => p.FederationNumber == federationNumber);
+        return Task.FromResult<PlayersDTO?>(player);
+    }
+    public Task<PlayersDTO?> FetchPlayerByIdAsync(int id)
+    {
+        var player = _playersToReturn.Find(p => p.ID == id);
+        return Task.FromResult<PlayersDTO?>(player);
+    }
 }

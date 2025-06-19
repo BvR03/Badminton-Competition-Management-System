@@ -4,13 +4,17 @@ using InterfaceLayer.DALInterfaces;
 using LogicLayer;
 using BCM.InfrastructureLayer;
 using Microsoft.AspNetCore.Diagnostics;
+using Serilog;
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 
-//  Add this line to fix the error
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 builder.Services.AddScoped<PlayerService>();
@@ -25,17 +29,24 @@ builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<IMatchRepo, MatchRepo>();
 builder.Services.AddScoped<MatchService>();
 builder.Services.AddScoped<EmailHandler>();
-builder.Services.AddScoped<EmailPasswordService>();
 
 
 
 
 
+var config = builder.Configuration;
+var env = builder.Environment;
+var connectionString = env.IsDevelopment()
+    ? config.GetConnectionString("LocalConnection")
+    : config.GetConnectionString("DefaultConnection");
+DAL.DatabaseManager.SetConnectionString(connectionString);
+var EmailPassword = builder.Configuration["EmailHost:EmailPW"];
+LogicLayer.EmailService.SetEmailPassword(EmailPassword);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler(errorApp =>
     {
@@ -51,6 +62,9 @@ if (app.Environment.IsDevelopment())
             {
                 try
                 {
+                    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(error, "An unhandled exception occurred.");
+
                     var emailService = context.RequestServices.GetRequiredService<EmailService>();
                     await Task.Run(() =>
                     {
@@ -61,14 +75,16 @@ if (app.Environment.IsDevelopment())
                         );
                     });
                 }
-                catch
+                catch (Exception innerEx)
                 {
-                    // Fail silently if even the email fails — avoid nested errors
+                    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(innerEx, "Error while sending failure email.");
                 }
             }
 
             context.Response.Redirect("/Error");
         });
+
     });
 
     app.UseHsts();

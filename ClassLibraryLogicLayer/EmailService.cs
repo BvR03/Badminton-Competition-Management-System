@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BCM.InfrastructureLayer;
-using System.Net.Mail;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BCM.InfrastructureLayer;
 
 namespace LogicLayer
 {
     public class EmailService
     {
+        private static string _emailPassword;
+
+        public static void SetEmailPassword(string password)
+        {
+            _emailPassword = password;
+        }
+
         public void SetUpEmail(string subject, string toEmail, string message)
         {
-            string Sender = "fontystestmails@gmail.com";
-            string EmailPassword = EmailPasswordService.ReturnEmailPassword();
-            EmailHandler.SendMessage(Sender, EmailPassword, subject, toEmail, message);
+            string sender = "fontystestmails@gmail.com";
+            EmailHandler.SendMessage(sender, _emailPassword, subject, toEmail, message);
         }
     }
+
 }
