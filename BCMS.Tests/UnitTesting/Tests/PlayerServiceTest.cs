@@ -21,6 +21,7 @@ namespace BCMS.Tests
             int FederationNumber = 120_950;
             string Email = null;
 
+
             // Act
             await logic.CreatePlayer(firstname, lastname, IsMale, FederationNumber, Email);
 
@@ -51,6 +52,33 @@ namespace BCMS.Tests
             // Assert
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("Euan", result[0].FirstName);
+        }
+
+        [TestMethod]
+        public async Task FetchPlayerByFederationNumberAsyncTest()
+        {
+            // Arrange
+            var fakeData = new FakePlayerRepo();
+            var expectedPlayer = new PlayersDTO
+            {
+                ID = 1,
+                FirstName = "Calumn",
+                LastName = "Hemming",
+                Gender = true,
+                FederationNumber = 123_456
+            };
+            fakeData.SetPlayers(new List<PlayersDTO> { expectedPlayer });
+            var logic = new PlayerService(fakeData);
+
+            // Act
+            var result = await logic.FetchPlayerByFederationNumberAsync(555_555);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Calumn", result.FirstName);
+            Assert.AreEqual("Hemming", result.LastName);
+            Assert.AreEqual(true, result.Gender);
+            Assert.AreEqual(123_456, result.FederationNumber);
         }
     }
 }
