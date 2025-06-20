@@ -71,7 +71,7 @@ namespace BCMS.Tests
             var logic = new PlayerService(fakeData);
 
             // Act
-            var result = await logic.FetchPlayerByFederationNumberAsync(555_555);
+            var result = await logic.FetchPlayerByFederationNumberAsync(123_456);
 
             // Assert
             Assert.IsNotNull(result);
