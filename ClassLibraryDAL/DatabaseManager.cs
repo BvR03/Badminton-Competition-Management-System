@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using MySqlConnector;
 
 
@@ -21,18 +15,31 @@ namespace DAL
 
         public static async Task<MySqlDataReader> Query(MySqlCommand query)
         {
+            try { 
             var connection = new MySqlConnection(_connectionString);
             query.Connection = connection;
             await connection.OpenAsync();
             return await query.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Database query failed.", ex);
+            }
         }
 
         public static async Task<int> ExecuteAsync(MySqlCommand command)
         {
-            var connection = new MySqlConnection(_connectionString);
-            command.Connection = connection;
-            await connection.OpenAsync();
-            return await command.ExecuteNonQueryAsync();
+            try
+            {
+                var connection = new MySqlConnection(_connectionString);
+                command.Connection = connection;
+                await connection.OpenAsync();
+                return await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Database query failed.", ex);
+            }
         }
     }
 }
